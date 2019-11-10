@@ -43,11 +43,14 @@ app.get("/register", function(req, res){
 //handling user sign up
 app.post("/register", function(req, res){
     User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+       //new User({name:req.body.fullname},{phoneno:req.body.phoneno},{dob:req.body.date});
+       
         if(err){
             console.log(err);
             return res.render('register');
         }
         passport.authenticate("local")(req, res, function(){
+            
             res.redirect("/secret");
         });
     });
